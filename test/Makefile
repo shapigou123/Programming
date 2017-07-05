@@ -1,0 +1,2 @@
+clean:
+	rm core*, *.o
