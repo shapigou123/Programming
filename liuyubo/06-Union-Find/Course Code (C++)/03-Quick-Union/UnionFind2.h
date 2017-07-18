@@ -61,7 +61,7 @@ namespace UF2{
 
             if( pRoot == qRoot )
                 return;
-
+            //一个元素的根对应另一个元素所对应的根
             parent[pRoot] = qRoot;
         }
     };

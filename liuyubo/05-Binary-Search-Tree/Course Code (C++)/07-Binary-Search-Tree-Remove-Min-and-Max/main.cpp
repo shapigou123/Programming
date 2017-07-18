@@ -2,6 +2,8 @@
 #include <queue>
 #include <cassert>
 #include <ctime>
+#include <stdlib.h>
+#include <time.h>
 
 using namespace std;
 
@@ -108,13 +110,14 @@ public:
     // 寻找二分搜索树的最大的键值
     Key maximum(){
         assert( count != 0 );
-        Node* maxNode = maximum(root);
+        Node* maxNode = maximum1(root);
         return maxNode->key;
     }
 
     // 从二分搜索树中删除最小值所在节点
     void removeMin(){
         if( root )
+            //删除以root为根的二叉搜索树中最小值所在的节点
             root = removeMin( root );
     }
 
@@ -218,6 +221,7 @@ private:
 
     // 返回以node为根的二分搜索树的最小键值所在的节点
     Node* minimum(Node* node){
+        //为空说明当前节点就是最下节点！！
         if( node->left == NULL )
             return node;
 
@@ -232,15 +236,27 @@ private:
         return maximum(node->right);
     }
 
+    //非递归方式
+    Node* maximum1(Node* node){
+        while( node->right != NULL)
+        {
+            node = node->right;
+        }
+        return node;
+    }
+
     // 删除掉以node为根的二分搜索树中的最小节点
     // 返回删除节点后新的二分搜索树的根
     Node* removeMin(Node* node){
 
         if( node->left == NULL ){
-
+            //已经找到最小节点
             Node* rightNode = node->right;
+            //在insert中new了Node
             delete node;
             count --;
+            //直接返回rightNode就涵盖了被删除节点右子树存在
+            //或者不存在的情况！
             return rightNode;
         }
 
@@ -259,7 +275,8 @@ private:
             count --;
             return leftNode;
         }
-
+        //node->right非空，说明当前节点不是最大节点
+        //则在node->right为根的子树中继续寻找最大值
         node->right = removeMax(node->right);
         return node;
     }
@@ -273,15 +290,16 @@ int main() {
     BST<int,int> bst = BST<int,int>();
 
     // 取n个取值范围在[0...m)的随机整数放进二分搜索树中
-    int n = 100;
-    int m = 100;
+    int n = 10;
+    int m = 10;
     for( int i = 0 ; i < n ; i ++ ){
         int key = rand()%m;
         // 为了后续测试方便,这里value值取和key值一样
         int value = key;
-        //cout<<key<<" ";
+        cout<<key<<" ";
         bst.insert(key,value);
     }
+        cout <<endl;
     // 注意, 由于随机生成的数据有重复, 所以bst中的数据数量大概率是小于n的
 
     // 测试 removeMin
@@ -299,13 +317,14 @@ int main() {
         int key = rand()%n;
         // 为了后续测试方便,这里value值取和key值一样
         int value = key;
-        //cout<<key<<" ";
+        cout<<key<<" ";
         bst.insert(key,value);
     }
     // 注意, 由于随机生成的数据有重复, 所以bst中的数据数量大概率是小于n的
 
     // 测试 removeMax
     // 输出的元素应该是从大到小排列的
+    cout<<endl;
     cout<<"Test removeMax: "<<endl;
     while( !bst.isEmpty() ){
         cout<<"max: "<<bst.maximum()<<" , ";

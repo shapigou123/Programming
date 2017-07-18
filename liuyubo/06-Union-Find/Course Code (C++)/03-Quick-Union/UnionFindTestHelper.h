@@ -7,6 +7,8 @@
 
 #include <iostream>
 #include <ctime>
+#include <time.h>
+#include <stdlib.h>
 #include "UnionFind1.h"
 #include "UnionFind2.h"
 

@@ -17,7 +17,7 @@ class DenseGraph{
 private:
     int n, m;       // 节点数和边数
     bool directed;  // 是否为有向图
-    vector<vector<bool>> g; // 图的具体数据
+    vector< vector<bool> > g; // 图的具体数据
 
 public:
     // 构造函数
@@ -27,7 +27,7 @@ public:
         this->m = 0;    // 初始化没有任何边
         this->directed = directed;
         // g初始化为n*n的布尔矩阵, 每一个g[i][j]均为false, 表示没有任和边
-        g = vector<vector<bool>>(n, vector<bool>(n, false));
+        g = vector< vector<bool> >(n, vector<bool>(n, false));
     }
 
     ~DenseGraph(){ }
@@ -59,7 +59,9 @@ public:
     }
 
     // 邻边迭代器, 传入一个图和一个顶点,
-    // 迭代在这个图中和这个顶点向连的所有顶点
+    // 迭代在这个图中和这个顶点相连的所有顶点
+    // 稠密图中迭代v所在的这一行的所有元素
+    // 若为false则没有该边
     class adjIterator{
     private:
         DenseGraph &G;  // 图G的引用
@@ -71,15 +73,16 @@ public:
         adjIterator(DenseGraph &graph, int v): G(graph){
             assert( v >= 0 && v < G.n );
             this->v = v;
-            this->index = -1;   // 索引从-1开始, 因为每次遍历都需要调用一次next()
+            // 索引从-1开始, 因为每次遍历都需要调用一次next()
+            this->index = -1;   
         }
 
         ~adjIterator(){}
 
         // 返回图G中与顶点v相连接的第一个顶点
         int begin(){
-
-            // 索引从-1开始, 因为每次遍历都需要调用一次next()
+// 索引从-1开始, 因为每次遍历都需要调用一次next()
+// 应该找v节点所在行中第一个为true的元素
             index = -1;
             return next();
         }
@@ -87,7 +90,8 @@ public:
         // 返回图G中与顶点v相连接的下一个顶点
         int next(){
 
-            // 从当前index开始向后搜索, 直到找到一个g[v][index]为true
+            // 从当前index开始向后搜索, 
+            // 直到找到一个g[v][index]为true
             for( index += 1 ; index < G.V() ; index ++ )
                 if( G.g[v][index] )
                     return index;

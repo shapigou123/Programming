@@ -11,10 +11,15 @@ int main() {
 
     string filename = "testG1.txt";
     int V = 8;
+    //设置输出的精度为2位小数
     cout<<fixed<<setprecision(2);
 
     // Test Weighted Dense Graph
+    // template <typename Weight>
+    // class DenseGraph
     DenseGraph<double> g1 = DenseGraph<double>(V, false);
+    // template <typename Graph, typename Weight>
+    // class ReadGraph
     ReadGraph<DenseGraph<double>,double> readGraph1(g1, filename);
     g1.show();
     cout<<endl;

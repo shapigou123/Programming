@@ -19,7 +19,7 @@ class SparseGraph{
 private:
     int n, m;       // 节点数和边数
     bool directed;  // 是否为有向图
-    vector<vector<Edge<Weight> *> > g;   // 图的具体数据
+    vector< vector<Edge<Weight> *> > g;   // 图的具体数据
 
 public:
     // 构造函数
@@ -29,7 +29,7 @@ public:
         this->m = 0;    // 初始化没有任何边
         this->directed = directed;
         // g初始化为n个空的vector, 表示每一个g[i]都为空, 即没有任和边
-        g = vector<vector<Edge<Weight> *> >(n, vector<Edge<Weight> *>());
+        g = vector< vector<Edge<Weight> *> >(n, vector<Edge<Weight> *>());
     }
 
     // 析构函数
@@ -43,13 +43,14 @@ public:
     int E(){ return m;} // 返回边的个数
 
     // 向图中添加一个边, 权值为weight
+    // 稀疏表中不处理平行边
     void addEdge( int v, int w , Weight weight){
         assert( v >= 0 && v < n );
         assert( w >= 0 && w < n );
 
         // 注意, 由于在邻接表的情况, 查找是否有重边需要遍历整个链表
         // 我们的程序允许重边的出现
-
+        // 向g[v]中push
         g[v].push_back(new Edge<Weight>(v, w, weight));
         if( v != w && !directed )
             g[w].push_back(new Edge<Weight>(w, v, weight));
@@ -61,6 +62,7 @@ public:
         assert( v >= 0 && v < n );
         assert( w >= 0 && w < n );
         for( int i = 0 ; i < g[v].size() ; i ++ )
+            //g[v][i]表示一个边，这个变种一定有一个顶点是V
             if( g[v][i]->other(v) == w )
                 return true;
         return false;

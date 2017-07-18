@@ -19,7 +19,8 @@ class DenseGraph{
 private:
     int n, m;       // 节点数和边数
     bool directed;  // 是否为有向图
-    vector<vector<Edge<Weight> *>> g;   // 图的具体数据
+    //g是二维数组，每一个空间都是Edge<Weight> *的类型
+    vector< vector<Edge<Weight> *> > g;   // 图的具体数据
 
 public:
     // 构造函数
@@ -29,7 +30,15 @@ public:
         this->m = 0;
         this->directed = directed;
         // g初始化为n*n的矩阵, 每一个g[i][j]指向一个边的信息, 初始化为NULL
-        g = vector<vector<Edge<Weight> *>>(n, vector<Edge<Weight> *>(n, NULL));
+        g = vector< vector<Edge<Weight> *> >(n, vector<Edge<Weight> *>(n, NULL));
+        #if 0
+        for(int i=0; i<n; i++)
+        {
+            //g.push_back( vector<bool>(n, NULL) )
+            g.push_back( vector<Edge<Weight> *>(n, NULL) )
+        }
+        #endif 
+
     }
 
     // 析构函数
@@ -59,6 +68,7 @@ public:
 
         g[v][w] = new Edge<Weight>(v, w, weight);
         if( v != w && !directed )
+            //不是有向图
             g[w][v] = new Edge<Weight>(w, v, weight);
         m ++;
     }

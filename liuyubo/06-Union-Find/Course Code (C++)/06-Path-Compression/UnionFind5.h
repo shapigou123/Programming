@@ -16,9 +16,13 @@ namespace UF5{
 
     private:
         // rank[i]表示以i为根的集合所表示的树的层数
-        // 在后续的代码中, 我们并不会维护rank的语意, 也就是rank的值在路径压缩的过程中, 有可能不在是树的层数值
-        // 这也是我们的rank不叫height或者depth的原因, 他只是作为比较的一个标准
-        // 关于这个问题，可以参考问答区：http://coding.imooc.com/learn/questiondetail/7287.html
+        // 在后续的代码中, 我们并不会维护rank的语意, 
+        // 也就是rank的值在路径压缩的过程中, 有可能
+        // 不在是树的层数值
+        // 这也是我们的rank不叫height或者depth的原因,
+        // 他只是作为比较的一个标准
+        // 关于这个问题，可以参考问答区：
+        // http://coding.imooc.com/learn/questiondetail/7287.html
         int* rank;
         int* parent; // parent[i]表示第i个元素所指向的父节点
         int count;   // 数据个数
@@ -48,6 +52,8 @@ namespace UF5{
 
             // path compression 1
             while( p != parent[p] ){
+                //路径压缩
+                //将p这个节点的父节点指向其父亲的父亲
                 parent[p] = parent[parent[p]];
                 p = parent[p];
             }

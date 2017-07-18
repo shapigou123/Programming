@@ -89,14 +89,19 @@ private:
             count ++;
             return new Node(key, value);
         }
-
+#if 0//不含重复元素
         if( key == node->key )
             node->value = value;
         else if( key < node->key )
             node->left = insert( node->left , key, value);
         else    // key > node->key
             node->right = insert( node->right, key, value);
-
+#endif
+        //含重复元素的二分搜索树
+        if( key <= node->key )
+            node->left = insert( node->left , key, value);
+        else    // key > node->key
+            node->right = insert( node->right, key, value);
         return node;
     }
 
@@ -133,7 +138,7 @@ private:
     void preOrder(Node* node){
 
         if( node != NULL ){
-            cout<<node->key<<endl;
+            cout<<node->key<<" ";
             preOrder(node->left);
             preOrder(node->right);
         }
@@ -144,7 +149,7 @@ private:
 
         if( node != NULL ){
             inOrder(node->left);
-            cout<<node->key<<endl;
+            cout<<node->key<<" ";
             inOrder(node->right);
         }
     }
@@ -155,7 +160,7 @@ private:
         if( node != NULL ){
             postOrder(node->left);
             postOrder(node->right);
-            cout<<node->key<<endl;
+            cout<<node->key<<" ";
         }
     }
 
@@ -182,7 +187,7 @@ int main() {
 
     // 取n个取值范围在[0...m)的随机整数放进二分搜索树中
     int N = 10;
-    int M = 100;
+    int M = 10;
     for( int i = 0 ; i < N ; i ++ ){
         int key = rand()%M;
         // 为了后续测试方便,这里value值取和key值一样

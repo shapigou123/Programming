@@ -21,7 +21,7 @@ public:
     // 从文件filename中读取图的信息, 存储进图graph中
     ReadGraph(Graph &graph, const string &filename){
 
-        ifstream file(filename);
+        ifstream file(filename.c_str());
         string line;
         int V, E;
 

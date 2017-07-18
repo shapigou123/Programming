@@ -281,11 +281,12 @@ private:
 
         if( node == NULL )
             return NULL;
-
+        //在node的左子树中删除节点
         if( key < node->key ){
             node->left = remove( node->left , key );
             return node;
         }
+        //在node的右子树中删除节点
         else if( key > node->key ){
             node->right = remove( node->right, key );
             return node;
@@ -312,6 +313,7 @@ private:
 
             // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
             // 用这个节点顶替待删除节点的位置
+            // node->left != NULL && node->right != NULL
             Node *successor = new Node(minimum(node->right));
             count ++;
 

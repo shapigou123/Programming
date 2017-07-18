@@ -20,7 +20,8 @@ namespace UF1 {
         int count;  // 数据个数
 
     public:
-        // 构造函数
+       // 构造函数
+        //int *id;
         UnionFind(int n) {
             count = n;
             id = new int[n];
@@ -52,11 +53,13 @@ namespace UF1 {
 
             int pID = find(p);
             int qID = find(q);
-
+            //说明p和q已经在一起了，不需要合并
             if (pID == qID)
                 return;
 
-            // 合并过程需要遍历一遍所有元素, 将两个元素的所属集合编号合并
+            // 合并过程需要遍历一遍所有元素, 
+            // 将两个元素的所属集合编号合并
+            // 就是让p和q所在的两个组的所有元素的id号都一样
             for (int i = 0; i < count; i++)
                 if (id[i] == pID)
                     id[i] = qID;

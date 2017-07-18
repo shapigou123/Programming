@@ -250,6 +250,16 @@ private:
         return maximum(node->right);
     }
 
+    //非递归方式
+    Node* maximum1(Node* node){
+        while( node->right != NULL)
+        {
+            node = node->right;
+        }
+        return node;
+    }
+
+
     // 删除掉以node为根的二分搜索树中的最小节点, 递归算法
     // 返回删除节点后新的二分搜索树的根
     Node* removeMin(Node* node){

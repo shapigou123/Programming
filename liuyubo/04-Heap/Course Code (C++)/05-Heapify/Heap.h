@@ -16,6 +16,7 @@ class MaxHeap{
 
 private:
     Item *data;
+    //表示堆中的元素个数
     int count;
     int capacity;
 

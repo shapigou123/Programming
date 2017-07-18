@@ -17,7 +17,7 @@ class SparseGraph{
 private:
     int n, m;       // 节点数和边数
     bool directed;  // 是否为有向图
-    vector<vector<int>> g;  // 图的具体数据
+    vector< vector<int> > g;  // 图的具体数据
 
 public:
     // 构造函数
@@ -27,7 +27,7 @@ public:
         this->m = 0;    // 初始化没有任何边
         this->directed = directed;
         // g初始化为n个空的vector, 表示每一个g[i]都为空, 即没有任和边
-        g = vector<vector<int>>(n, vector<int>());
+        g = vector< vector<int> >(n, vector<int>());
     }
 
     ~SparseGraph(){ }
@@ -65,11 +65,14 @@ public:
     class adjIterator{
     private:
         SparseGraph &G; // 图G的引用
-        int v;
-        int index;
+        int v;  //顶点
+        int index;  //指示当前迭代到了哪里
 
     public:
         // 构造函数
+        // 我们要迭代的图SparseGraph &graph
+        // 我们要迭代这张图中的哪一个顶点int v
+        // 由于是图的引用，采用初始化列表的方式初始化
         adjIterator(SparseGraph &graph, int v): G(graph){
             this->v = v;
             this->index = 0;
@@ -88,6 +91,8 @@ public:
 
         // 返回图G中与顶点v相连接的下一个顶点
         int next(){
+            //用户没一次调用next，index++就访问到了
+            //下一个相邻的节点
             index ++;
             if( index < G.g[v].size() )
                 return G.g[v][index];
@@ -95,7 +100,9 @@ public:
             return -1;
         }
 
-        // 查看是否已经迭代完了图G中与顶点v相连接的所有顶点
+        // 查看是否已经迭代完了图G中与顶点v
+        // 相连接的所有顶点
+        // 迭代完成返回true
         bool end(){
             return index >= G.g[v].size();
         }

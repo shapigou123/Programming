@@ -19,7 +19,7 @@ class SparseGraph{
 private:
     int n, m;       // 节点数和边数
     bool directed;  // 是否为有向图
-    vector<vector<Edge<Weight> *> > g;   // 图的具体数据
+    vector< vector<Edge<Weight> *> > g;   // 图的具体数据
 
 public:
     // 构造函数
@@ -29,7 +29,7 @@ public:
         this->m = 0;    // 初始化没有任何边
         this->directed = directed;
         // g初始化为n个空的vector, 表示每一个g[i]都为空, 即没有任和边
-        g = vector<vector<Edge<Weight> *> >(n, vector<Edge<Weight> *>());
+        g = vector< vector<Edge<Weight> *> >(n, vector<Edge<Weight> *>());
     }
 
     // 析构函数

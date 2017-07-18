@@ -27,7 +27,7 @@ int call1(char *p, callBackFun pCallBack)
 
 // 执行回调函数，方式二：直接通过方法指针
 // 或者是int call2(char *p, int (*ptr)(char *)) 同时ptr可以任意取
-int call2(char *p, int (*pCallBack)())
+int call2(char *p, int (*pCallBack)(char *p))
 {
 	printf("call2:%s\n",p);
 	(*pCallBack)(p);

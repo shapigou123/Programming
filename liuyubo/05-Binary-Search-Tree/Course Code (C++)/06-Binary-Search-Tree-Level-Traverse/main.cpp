@@ -82,13 +82,16 @@ public:
 
         queue<Node*> q;
         q.push(root);
+        //队列为空时结束循环
+        //empty方法，当队列为空，返回1，非空返回0
         while( !q.empty() ){
-
+            //取出队首的元素
             Node *node = q.front();
+            //队首元素出队
             q.pop();
 
             cout<<node->key<<endl;
-
+            //非空则入队
             if( node->left )
                 q.push( node->left );
             if( node->right )

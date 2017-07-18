@@ -23,6 +23,7 @@ private:
     int s;          // 起始点
     bool *visited;  // 记录dfs的过程中节点是否被访问
     int *from;      // 记录路径, from[i]表示查找的路径上i的上一个节点
+    //记录s到每一个节点的最短距离
     int *ord;       // 记录路径中节点的次序。ord[i]表示i节点在路径中的次序。
 
 public:
@@ -44,21 +45,27 @@ public:
 
         // 无向图最短路径算法, 从s开始广度优先遍历整张图
         queue<int> q;
-
+        //将起始点推入队列
         q.push( s );
+        //表示已经遍历了s
         visited[s] = true;
+        //s到s的距离为0
         ord[s] = 0;
         while( !q.empty() ){
-
+            //取出队列首的元素
             int v = q.front();
+            //移除队列首的元素
             q.pop();
-
+            //拿到队列首的元素后需要遍历队列首的所有相邻的元素
             typename Graph::adjIterator adj(G, v);
             for( int i = adj.begin() ; !adj.end() ; i = adj.next() )
                 if( !visited[i] ){
+                    //i这个节点没有加入到队列中则将其加入队列
                     q.push(i);
                     visited[i] = true;
+                    //记录是从V走到i这个节点的
                     from[i] = v;
+                    //s到i的距离为从i前一个节点v到s的距离加1
                     ord[i] = ord[v] + 1;
                 }
         }

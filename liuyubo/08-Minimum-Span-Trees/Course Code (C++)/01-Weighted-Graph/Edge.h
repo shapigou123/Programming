@@ -11,9 +11,12 @@
 using namespace std;
 
 // 边
+// 每个边存储相应的权值
 template<typename Weight>
 class Edge{
 private:
+    //无向边来说a b的顺序没有关系
+    //有向边：设定a——>b
     int a,b;    // 边的两个端点
     Weight weight;  // 边的权值
 
@@ -33,7 +36,7 @@ public:
     int w(){ return b;} // 返回第二个顶点
     Weight wt(){ return weight;}    // 返回权值
 
-    // 给定一个顶点, 返回另一个顶点
+    // 给定一个顶点, 返回边的另一个顶点
     int other(int x){
         assert( x == a || x == b );
         return x == a ? b : a;

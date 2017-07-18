@@ -47,16 +47,17 @@ namespace UF5{
             assert( p >= 0 && p < count );
 
             // path compression 1
+            #if 0
             while( p != parent[p] ){
                 parent[p] = parent[parent[p]];
                 p = parent[p];
             }
             return p;
-
+            #endif
             // path compression 2, 递归算法
-//            if( p != parent[p] )
-//                parent[p] = find( parent[p] );
-//            return parent[p];
+            if( p != parent[p] )
+                parent[p] = find( parent[p] );
+            return parent[p];
         }
 
         // 查看元素p和元素q是否所属一个集合

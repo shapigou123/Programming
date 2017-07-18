@@ -360,7 +360,8 @@ private:
             return floor( node->left , key );
 
         // 如果node->key < key
-        // 则node有可能是key的floor节点, 也有可能不是(存在比node->key大但是小于key的其余节点)
+        // 则node有可能是key的floor节点, 
+        // 也有可能不是(存在比node->key大但是小于key的其余节点)
         // 需要尝试向node的右子树寻找一下
         Node* tempNode = floor( node->right , key );
         if( tempNode != NULL )

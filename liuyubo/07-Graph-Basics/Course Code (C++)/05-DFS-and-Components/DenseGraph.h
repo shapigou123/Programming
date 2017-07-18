@@ -17,7 +17,7 @@ class DenseGraph{
 private:
     int n, m;       // 节点数和边数
     bool directed;  // 是否为有向图
-    vector<vector<bool>> g; // 图的具体数据
+    vector< vector<bool> > g; // 图的具体数据
 
 public:
     // 构造函数
@@ -27,7 +27,7 @@ public:
         this->m = 0;    // 初始化没有任何边
         this->directed = directed;
         // g初始化为n*n的布尔矩阵, 每一个g[i][j]均为false, 表示没有任和边
-        g = vector<vector<bool>>(n, vector<bool>(n, false));
+        g = vector< vector<bool> >(n, vector<bool>(n, false));
     }
 
     ~DenseGraph(){ }

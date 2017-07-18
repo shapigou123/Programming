@@ -14,7 +14,7 @@ int main()
 	return 0;
 }
 
-返回一个依赖参数的可写指针：
+//返回一个依赖参数的可写指针：
 msg_hdr* get_hdr(char* buf)
 {
     return (msg_hdr*)buf;

@@ -11,6 +11,8 @@ int main() {
     // 使用两种图的存储方式读取testG1.txt文件
     string filename = "testG1.txt";
     SparseGraph g1( 13 , false );
+    //ReadGraph是一个模板类
+    //将filename中的内容读进稀疏图g1
     ReadGraph<SparseGraph> readGraph1( g1 , filename );
     cout<<"test G1 in Sparse Graph:" << endl;
     g1.show();

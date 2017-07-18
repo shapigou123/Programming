@@ -27,7 +27,7 @@ namespace UF4{
             this->count = count;
             for( int i = 0 ; i < count ; i ++ ){
                 parent[i] = i;
-                rank[i] = 1;
+                rank[i] = 1;//初始时，所有元素只有一层
             }
         }
 
@@ -39,6 +39,7 @@ namespace UF4{
 
         // 查找过程, 查找元素p所对应的集合编号
         // O(h)复杂度, h为树的高度
+        // 找到的是根节点
         int find(int p){
             assert( p >= 0 && p < count );
             // 不断去查询自己的父亲节点, 直到到达根节点
@@ -67,6 +68,9 @@ namespace UF4{
             // 根据两个元素所在树的元素个数不同判断合并方向
             // 将元素个数少的集合合并到元素个数多的集合上
             if( rank[pRoot] < rank[qRoot] ){
+                //将pRoot指向父亲节点的指针指向qRoot
+                // 原pRoot对应的树的层数加1，则小与等于qRoot所在
+                // 树的层数，qRoot相应的层数不用改变
                 parent[pRoot] = qRoot;
             }
             else if( rank[qRoot] < rank[pRoot]){
@@ -74,6 +78,7 @@ namespace UF4{
             }
             else{ // rank[pRoot] == rank[qRoot]
                 parent[pRoot] = qRoot;
+                //原来pRoot是在根的位置，现在是在qRoot的第二层
                 rank[qRoot] += 1;   // 此时, 我维护rank的值
             }
         }
