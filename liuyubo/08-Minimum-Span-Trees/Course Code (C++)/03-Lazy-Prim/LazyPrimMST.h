@@ -57,8 +57,11 @@ public:
 
         // Lazy Prim
         visit(0);
+        //所有的边在prim算法中都会进入到pq中
+        //所以while循环会执行E次
         while( !pq.isEmpty() ){
             // 使用最小堆找出已经访问的边中权值最小的边
+            //extractMin操作是logE级别的
             Edge<Weight> e = pq.extractMin();
             // 如果这条边的两端都已经访问过了, 则扔掉这条边
             // 即这两个端点在切分的同侧，即不是一个横切边

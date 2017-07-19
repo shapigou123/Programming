@@ -16,23 +16,25 @@ template <typename Graph, typename Weight>
 class BellmanFord{
 
 private:
-    Graph &G;                   // 图的引用
-    int s;                      // 起始点
-    Weight* distTo;             // distTo[i]存储从起始点s到i的最短路径长度
-    vector<Edge<Weight>*> from; // from[i]记录最短路径中, 到达i点的边是哪一条
+    Graph &G;         // 图的引用
+    int s;            // 起始点
+    Weight* distTo;   // distTo[i]存储从起始点s到i的最短路径长度
+    vector<Edge<Weight>* > from; // from[i]记录最短路径中, 到达i点的边是哪一条
                                 // 可以用来恢复整个最短路径
     bool hasNegativeCycle;      // 标记图中是否有负权环
 
-    // 判断图中是否有负权环
+    // 判断图中是否有负权环，也就是对所有节点的松弛操作
     bool detectNegativeCycle(){
 
         for( int i = 0 ; i < G.V() ; i ++ ){
+            //遍历一边所有的点，然后对所有的点的邻边再进行一次遍历
             typename Graph::adjIterator adj(G,i);
             for( Edge<Weight>* e = adj.begin() ; !adj.end() ; e = adj.next() )
+                //如果发现还有边每访问过或者还能进行松弛，说明存在负权环
                 if( from[e->v()] && distTo[e->v()] + e->wt() < distTo[e->w()] )
                     return true;
         }
-
+        //经过上面的循环，所有的边都不能进行松弛操作，说明不存在负权环
         return false;
     }
 
@@ -54,17 +56,22 @@ public:
         // 进行V-1次循环, 每一次循环求出从起点到其余所有点, 最多使用pass步可到达的最短距离
         for( int pass = 1 ; pass < G.V() ; pass ++ ){
 
-            // 每次循环中对所有的边进行一遍松弛操作
+            // 每次循环中对所有点的邻边边进行一遍松弛操作
             // 遍历所有边的方式是先遍历所有的顶点, 然后遍历和所有顶点相邻的所有边
             for( int i = 0 ; i < G.V() ; i ++ ){
                 // 使用我们实现的邻边迭代器遍历和所有顶点相邻的所有边
+                // 对图中的i这个节点的所有邻边进行遍历
+                
                 typename Graph::adjIterator adj(G,i);
                 for( Edge<Weight>* e = adj.begin() ; !adj.end() ; e = adj.next() )
                     // 对于每一个边首先判断e->v()可达
                     // 之后看如果e->w()以前没有到达过， 显然我们可以更新distTo[e->w()]
                     // 或者e->w()以前虽然到达过, 但是通过这个e我们可以获得一个更短的距离, 即可以进行一次松弛操作, 我们也可以更新distTo[e->w()]
+                    // 从e->v()这个点，绕到了i这个点，然后再绕回到e->w()这个点是否比
+                    // 直接去到e->w()距离还要小？
                     if( from[e->v()] && (!from[e->w()] || distTo[e->v()] + e->wt() < distTo[e->w()]) ){
                         distTo[e->w()] = distTo[e->v()] + e->wt();
+                        //我们是通过e这条边到达的e->w()这个点，即经由了i这个点
                         from[e->w()] = e;
                     }
             }

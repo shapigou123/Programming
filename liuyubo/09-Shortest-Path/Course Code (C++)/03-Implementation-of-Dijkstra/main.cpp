@@ -15,10 +15,10 @@ int main() {
     SparseGraph<int> g = SparseGraph<int>(V, true);
     // Dijkstra最短路径算法同样适用于有向图
     //SparseGraph<int> g = SparseGraph<int>(V, false);
-    ReadGraph<SparseGraph<int>, int> readGraph(g, filename);
+    ReadGraph< SparseGraph<int>, int > readGraph(g, filename);
 
     cout<<"Test Dijkstra:"<<endl<<endl;
-    Dijkstra<SparseGraph<int>, int> dij(g,0);
+    Dijkstra< SparseGraph<int>, int > dij(g,0);
     for( int i = 0 ; i < V ; i ++ ){
         if(dij.hasPathTo(i)){
             cout<<"Shortest Path to "<<i<<" : "<<dij.shortestPathTo(i)<<endl;

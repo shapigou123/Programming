@@ -19,10 +19,12 @@ class PrimMST{
 
 private:
     Graph &G;                     // 图的引用
+    //存储的是权值
     IndexMinHeap<Weight> ipq;     // 最小索引堆, 算法辅助数据结构
-    vector<Edge<Weight>*> edgeTo; // 访问的点所对应的边, 算法辅助数据结构
+    //存储横切边
+    vector< Edge<Weight>* > edgeTo; // 访问的点所对应的边, 算法辅助数据结构
     bool* marked;                 // 标记数组, 在算法运行过程中标记节点i是否被访问
-    vector<Edge<Weight>> mst;     // 最小生成树所包含的所有边
+    vector< Edge<Weight> > mst;     // 最小生成树所包含的所有边
     Weight mstWeight;             // 最小生成树的权值
 
     // 访问节点v
@@ -31,19 +33,23 @@ private:
         assert( !marked[v] );
         marked[v] = true;
 
+        // 访问顶点V所有相邻的邻边
         // 将和节点v相连接的未访问的另一端点, 和与之相连接的边, 放入最小堆中
         typename Graph::adjIterator adj(G,v);
         for( Edge<Weight>* e = adj.begin() ; !adj.end() ; e = adj.next() ){
             int w = e->other(v);
             // 如果边的另一端点未被访问
             if( !marked[w] ){
+                //若这个边被标记过，那么这个边就不是横切边，不处理
                 // 如果从没有考虑过这个端点, 直接将这个端点和与之相连接的边加入索引堆
                 if( !edgeTo[w] ){
+                    //更新边
                     edgeTo[w] = e;
                     ipq.insert(w, e->wt());
                 }
                 // 如果曾经考虑这个端点, 但现在的边比之前考虑的边更短, 则进行替换
                 else if( e->wt() < edgeTo[w]->wt() ){
+                    //只需要考虑新的权值更小的横切边
                     edgeTo[w] = e;
                     ipq.change(w, e->wt());
                 }
@@ -67,12 +73,15 @@ public:
 
         // Prim
         visit(0);
+        //visit之后和0相连的所有邻边都加入到了最小索引堆中了
         while( !ipq.isEmpty() ){
             // 使用最小索引堆找出已经访问的边中权值最小的边
             // 最小索引堆中存储的是点的索引, 通过点的索引找到相对应的边
             int v = ipq.extractMinIndex();
             assert( edgeTo[v] );
+            //通过edgeTo由索引找到和索引相连的边！
             mst.push_back( *edgeTo[v] );
+            //visit新的顶点
             visit( v );
         }
 
@@ -85,7 +94,7 @@ public:
         delete[] marked;
     }
 
-    vector<Edge<Weight>> mstEdges(){
+    vector<Edge<Weight> > mstEdges(){
         return mst;
     };
 

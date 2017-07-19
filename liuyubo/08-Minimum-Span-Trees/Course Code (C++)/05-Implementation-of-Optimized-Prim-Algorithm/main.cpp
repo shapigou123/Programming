@@ -19,7 +19,7 @@ int main() {
     // Test Lazy Prim MST
     cout<<"Test Lazy Prim MST:"<<endl;
     LazyPrimMST<SparseGraph<double>, double> lazyPrimMST(g);
-    vector<Edge<double>> mst = lazyPrimMST.mstEdges();
+    vector<Edge<double> > mst = lazyPrimMST.mstEdges();
     for( int i = 0 ; i < mst.size() ; i ++ )
         cout<<mst[i]<<endl;
     cout<<"The MST weight is: "<<lazyPrimMST.result()<<endl;

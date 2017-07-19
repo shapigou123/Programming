@@ -19,9 +19,9 @@ class LazyPrimMST{
 
 private:
     Graph &G;                   // 图的引用
-    MinHeap<Edge<Weight>> pq;   // 最小堆, 算法辅助数据结构
+    MinHeap<Edge<Weight> > pq;   // 最小堆, 算法辅助数据结构
     bool *marked;               // 标记数组, 在算法运行过程中标记节点i是否被访问
-    vector<Edge<Weight>> mst;   // 最小生成树所包含的所有边
+    vector<Edge<Weight> > mst;   // 最小生成树所包含的所有边
     Weight mstWeight;           // 最小生成树的权值
 
     // 访问节点v
@@ -39,7 +39,7 @@ private:
 
 public:
     // 构造函数, 使用Prim算法求图的最小生成树
-    LazyPrimMST(Graph &graph):G(graph), pq(MinHeap<Edge<Weight>>(graph.E())){
+    LazyPrimMST(Graph &graph):G(graph), pq(MinHeap<Edge<Weight> >(graph.E())){
 
         // 算法初始化
         marked = new bool[G.V()];
@@ -77,7 +77,7 @@ public:
     }
 
     // 返回最小生成树的所有边
-    vector<Edge<Weight>> mstEdges(){
+    vector<Edge<Weight> > mstEdges(){
         return mst;
     };
 

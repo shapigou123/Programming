@@ -18,7 +18,7 @@ template <typename Graph, typename Weight>
 class KruskalMST{
 
 private:
-    vector<Edge<Weight>> mst;   // 最小生成树所包含的所有边
+    vector<Edge<Weight> > mst;   // 最小生成树所包含的所有边
     Weight mstWeight;           // 最小生成树的权值
 
 public:
@@ -26,10 +26,15 @@ public:
     KruskalMST(Graph &graph){
 
         // 将图中的所有边存放到一个最小堆中
-        MinHeap<Edge<Weight>> pq( graph.E() );
+        MinHeap<Edge<Weight> > pq( graph.E() );
+        //遍历图中所有的边，也就是遍历所有的顶点
         for( int i = 0 ; i < graph.V() ; i ++ ){
+            //找出每一个顶点所有的邻边
+            //每次都迭代i这个顶点的邻边
             typename Graph::adjIterator adj(graph,i);
             for( Edge<Weight> *e = adj.begin() ; !adj.end() ; e = adj.next() )
+                //最小生成树是针对无向图的，为了避免在pq中存了两次
+                //1-2 2-1
                 if( e->v() < e->w() )
                     pq.insert(*e);
         }
