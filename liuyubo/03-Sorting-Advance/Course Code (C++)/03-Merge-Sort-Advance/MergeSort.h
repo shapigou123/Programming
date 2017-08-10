@@ -21,6 +21,7 @@ void __merge(T arr[], int l, int mid, int r){
     //T *aux = new T[r-l+1];
 
     for( int i = l ; i <= r; i ++ )
+        //辅助空间是从0开始的，而我们要处理的数组是从l开始的，有l的偏移量
         aux[i-l] = arr[i];
 
     // 初始化，i指向左半部分的起始索引位置l；j指向右半部分起始索引位置mid+1

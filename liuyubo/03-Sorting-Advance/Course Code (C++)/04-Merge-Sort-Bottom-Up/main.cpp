@@ -20,8 +20,10 @@ void mergeSortBU(T arr[], int n){
     // 对于小数组, 使用插入排序优化
     for( int i = 0 ; i < n ; i += 16 )
         insertionSort(arr,i,min(i+15,n-1));
-
+    
+    // 每次归并元素考虑的元素个数，第一次1个第二次2个第三次4个...
     for( int sz = 16; sz < n ; sz += sz )
+        //每一轮归并中起始的元素位置
         for( int i = 0 ; i < n - sz ; i += sz+sz )
             // 对于arr[mid] <= arr[mid+1]的情况,不进行merge
             if( arr[i+sz-1] > arr[i+sz] )

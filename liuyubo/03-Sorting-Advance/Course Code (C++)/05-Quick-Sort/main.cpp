@@ -14,7 +14,9 @@ int __partition(T arr[], int l, int r){
     T v = arr[l];
 
     int j = l; // arr[l+1...j] < v ; arr[j+1...i) > v
+    //初始时arr[l+1..j]、arr[j+1...i)为空
     for( int i = l + 1 ; i <= r ; i ++ )
+        //arr[i]>v时不需要做任何事，i++即可
         if( arr[i] < v ){
             j ++;
             swap( arr[j] , arr[i] );
