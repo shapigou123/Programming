@@ -1,5 +1,6 @@
 #coding=utf-8
 
+'''
 class myclass(object):
 	"""docstring for myclass"""
 	name = 'yuyang'
@@ -13,7 +14,11 @@ print myclass.name
 myclass.age = 12
 print myclass.age
 print p1.age
+'''
 
+
+##########################################
+'''
 class Person(object):
 
     __count = 0
@@ -24,12 +29,22 @@ class Person(object):
 
 p1 = Person('Bob')
 p2 = Person('Alice')
+print p1.name
+print p2.name
 
+'''
+
+
+####################################
+'''
 class Person(object):
 
     def __init__(self, name, score):
         self.__name = name
         self.__score = score
+
+    def get_name(self):
+        return self.__name
 
     def get_grade(self):
         if self.__score < 60:
@@ -46,7 +61,11 @@ print p1.get_grade()
 print p2.get_grade()
 print p3.get_grade()
 
+print p1.get_name()
+'''
 
+#######################################
+'''
 class Person(object):
 
     def __init__(self, name, score):
@@ -67,7 +86,10 @@ p3 = Person('Tim', 48)
 print p1.get_grade()
 print p2.get_grade()
 print p3.get_grade()
+'''
 
+###########################################
+'''
 class Person(object):
 
     def __init__(self, name, score):
@@ -78,7 +100,10 @@ class Person(object):
 p1 = Person('Bob', 90)
 print p1.get_grade #是一个绑定到实例的函数
 print p1.get_grade() #方法调用
+'''
 
+############################################
+'''
 class Person(object):
     __count = 0
     def __init__(self, name):
@@ -90,7 +115,11 @@ p1 = Person('Bob')
 p2 = Person('Alice')
 
 #print Person.__count
-#
+'''
+
+#########################################
+
+'''
 class Person(object):
 
     __count = 0
@@ -106,9 +135,14 @@ class Person(object):
 print Person.how_many()
 
 p1 = Person('Bob')
+print p1.name
 
 print Person.how_many()
+'''
 
+########################################
+
+'''
 class Person(object):
     def __init__(self, name, gender):
         self.name = name
@@ -126,3 +160,24 @@ print t.course
 
 print type(t)
 print dir(t)
+'''
+
+class Person(object):
+    def __init__(self, name, gender):
+        self.name = name
+        self.gender = gender
+
+class Student(Person):
+    def __init__(self, name, gender, score):
+        super(Student, self).__init__(name, gender)
+        self.score = score
+
+t = Student('Alice', 'Female', 'English')
+print t.name
+print type(t)
+#print dir(t)
+
+l = [1,2,3]
+print type(l)
+
+print isinstance(l,list)

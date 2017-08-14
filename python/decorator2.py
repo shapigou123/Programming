@@ -18,4 +18,3 @@ def deco(func):
 def bar(x,y):
 	print 'in bar', x+y
 bar(1,2)
-奥术大师多asd

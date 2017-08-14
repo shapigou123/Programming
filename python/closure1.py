@@ -1,5 +1,5 @@
 #coding=utf-8
-'''
+
 def function(val):
 	if val >= passline:
 		print ('%d pass' %val)
@@ -13,9 +13,9 @@ def function(val):
 f = function(89)	
 f() #in_func
 print f.__closure__
+
+
 '''
-
-
 def func_100(val):
 	passline = 60
 	if val >= passline:
@@ -38,11 +38,11 @@ def set_passline(passline):
 			print('failed')
 	return cmp
 
-f_100 = set_passline(60) #passline = 60
-f_150 = set_passline(90) #passline = 90
-print(type(f_100))
-print(f_100.__closure__)
-f_100(89)
-f_100(59)
-f_150(89)
-
+#f_100 = set_passline(60) #passline = 60
+#f_150 = set_passline(90) #passline = 90
+#print(type(f_100))
+#print(f_100.__closure__)
+#f_100(89)
+#f_100(59)
+#f_150(89)
+'''

@@ -21,3 +21,6 @@ class FloatRange:
 
 for x in reversed(FloatRange(1.0, 4.0, 0.5)):
     print x
+
+for x in FloatRange(1.0, 4.0, 0.5):
+    print x

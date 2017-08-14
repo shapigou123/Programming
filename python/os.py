@@ -4,6 +4,11 @@ import os
 import os.path
 from os import path
 
+import closure1
+closure1.func_100(88)
+closure1.test()
+
+'''
 class Person(object):
     pass
 xiaoming = Person()
@@ -14,3 +19,4 @@ print xiaoming == xiaohong
 
 print isdir(r'C:\Windows')
 print isfile(r'C:\Windows\notepad.exe')
+'''
