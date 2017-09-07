@@ -1,5 +1,0 @@
-﻿  Joseph.cpp
-c:\users\yuyang\desktop\vs2015\acm\acm\joseph.cpp(7): warning C4005: “OVERFLOW”: 宏重定义
-  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\math.h(954): note: 参见“OVERFLOW”的前一个定义
-  ACM.vcxproj -> C:\Users\yuyang\Desktop\VS2015\ACM\Debug\ACM.exe
-  ACM.vcxproj -> C:\Users\yuyang\Desktop\VS2015\ACM\Debug\ACM.pdb (Full PDB)
